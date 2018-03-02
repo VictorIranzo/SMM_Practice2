@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     private BoardManager boardScript;                       //Store a reference to our BoardManager which will set up the level.
     private int level = 3;                                  //Current level number, expressed in game as "Day 1".
 
+    public int playerFoodPoints = 100;
+    [HideInInspector] public bool playersTurn = true;
+
     //Awake is always called before any Start functions
     void Awake()
     {
@@ -41,6 +44,11 @@ public class GameManager : MonoBehaviour
         //Call the SetupScene function of the BoardManager script, pass it current level number.
         boardScript.SetupScene(level);
 
+    }
+
+    public void GameOver()
+    {
+        enabled = false;
     }
 
     //Update is called every frame.

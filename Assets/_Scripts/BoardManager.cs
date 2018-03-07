@@ -35,9 +35,11 @@ namespace Completed
 		public GameObject[] wallTiles;									//Array of wall prefabs.
 		public GameObject[] foodTiles;									//Array of food prefabs.
 		public GameObject[] enemyTiles;									//Array of enemy prefabs.
-		public GameObject[] outerWallTiles;								//Array of outer tile prefabs.
+		public GameObject[] outerWallTiles;                             //Array of outer tile prefabs.
+
+        public String[,] loadedPart;
 		
-		private Transform boardHolder;									//A variable to store a reference to the transform of our Board object.
+        private Transform boardHolder;									//A variable to store a reference to the transform of our Board object.
 		private List <Vector3> gridPositions = new List <Vector3> ();	//A list of possible locations to place tiles.
 		
 		
@@ -72,26 +74,40 @@ namespace Completed
 				//Loop along y axis, starting from -1 to place floor or outerwall tiles.
 				for(int y = -1; y < rows + 1; y++)
 				{
-					//Choose a random tile from our array of floor tile prefabs and prepare to instantiate it.
-					GameObject toInstantiate = floorTiles[Random.Range (0,floorTiles.Length)];
-					
-					//Check if we current position is at board edge, if so choose a random outer wall prefab from our array of outer wall tiles.
-					if(x == -1 || x == columns || y == -1 || y == rows)
-						toInstantiate = outerWallTiles [Random.Range (0, outerWallTiles.Length)];
-					
-					//Instantiate the GameObject instance using the prefab chosen for toInstantiate at the Vector3 corresponding to current grid position in loop, cast it to GameObject.
-					GameObject instance =
-						Instantiate (toInstantiate, new Vector3 (x, y, 0f), Quaternion.identity) as GameObject;
-					
-					//Set the parent of our newly instantiated object instance to boardHolder, this is just organizational to avoid cluttering hierarchy.
-					instance.transform.SetParent (boardHolder);
+                    GameObject toInstantiate;
+
+                    if (x > 0 && y > 0 && x < rows && y < columns && loadedPart[x, y] != null)
+                    {
+                        toInstantiate = InstantiateObject(loadedPart[x, y]);
+                    }
+                    else
+                    {
+                        //Choose a random tile from our array of floor tile prefabs and prepare to instantiate it.
+                        toInstantiate = floorTiles[Random.Range(0, floorTiles.Length)];
+
+                        //Check if we current position is at board edge, if so choose a random outer wall prefab from our array of outer wall tiles.
+                        if (x == -1 || x == columns || y == -1 || y == rows)
+                            toInstantiate = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
+                    }
+
+                    //Instantiate the GameObject instance using the prefab chosen for toInstantiate at the Vector3 corresponding to current grid position in loop, cast it to GameObject.
+                    GameObject instance =
+                        Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
+
+                    //Set the parent of our newly instantiated object instance to boardHolder, this is just organizational to avoid cluttering hierarchy.
+                    instance.transform.SetParent(boardHolder);
 				}
 			}
 		}
-		
-		
-		//RandomPosition returns a random position from our list gridPositions.
-		Vector3 RandomPosition ()
+
+        private GameObject InstantiateObject(string v)
+        {
+            return outerWallTiles[Random.Range(0, outerWallTiles.Length)];
+        }
+
+
+        //RandomPosition returns a random position from our list gridPositions.
+        Vector3 RandomPosition ()
 		{
 			//Declare an integer randomIndex, set it's value to a random number between 0 and the count of items in our List gridPositions.
 			int randomIndex = Random.Range (0, gridPositions.Count);
@@ -131,11 +147,14 @@ namespace Completed
 		//SetupScene initializes our level and calls the previous functions to lay out the game board
 		public void SetupScene (int level)
 		{
-			//Creates the outer walls and floor.
-			BoardSetup ();
-			
-			//Reset our list of gridpositions.
-			InitialiseList ();
+            // Inserts specific blocks of a level.
+            LoadSpecificLevel(level);
+
+            //Creates the outer walls and floor.
+            BoardSetup ();
+
+            //Reset our list of gridpositions.
+            InitialiseList();
 			
 			//Instantiate a random number of wall tiles based on minimum and maximum, at randomized positions.
 			LayoutObjectAtRandom (wallTiles, wallCount.minimum, wallCount.maximum);
@@ -152,5 +171,16 @@ namespace Completed
 			//Instantiate the exit tile in the upper right hand corner of our game board
 			Instantiate (exit, new Vector3 (columns - 1, rows - 1, 0f), Quaternion.identity);
 		}
-	}
+
+        private void LoadSpecificLevel(int level)
+        {
+            loadedPart = new String[rows, columns];
+
+            switch (level) {
+                case 1:
+                    loadedPart[5, 5] = "ROCK";
+                    break;
+            }
+        }
+    }
 }

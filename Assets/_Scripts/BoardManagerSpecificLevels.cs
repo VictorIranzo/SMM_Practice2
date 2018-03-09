@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Completed
 {
@@ -15,7 +16,25 @@ namespace Completed
                 {   "",    "",  EMPTY,  EMPTY,     "",     "",     "",     ""},
                 {   "",    "",     "",     "",     "",     "",     "",     ""},
             };
-            return Transpose(level1);
+            return Transpose(InvertRows(level1));
+        }
+
+        private string[,] InvertRows(string[,] matrix)
+        {
+            int w = matrix.GetLength(0);
+            int h = matrix.GetLength(1);
+
+            string[,] result = new string[w, h];
+
+            for (int i = 0; i < w; i++)
+            {
+                for (int j = 0; j < h; j++)
+                {
+                    result[i, j] = matrix[w - i - 1, j];
+                }
+            }
+
+            return result;
         }
 
         public string[,] Transpose(string[,] matrix)

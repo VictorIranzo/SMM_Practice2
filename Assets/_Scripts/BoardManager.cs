@@ -57,12 +57,17 @@ namespace Completed
 			gridPositions.Clear ();
 			
 			//Loop through x axis (columns).
-			for(int x = 1; x < columns-1; x++)
+			for(int x = 0; x < rows; x++)
 			{
                 //Within each column, loop through y axis (rows).
-                for (int y = 1; y < rows - 1; y++)
+                for (int y = 0; y < columns; y++)
                 {
-                    if (loadedPart[y - 1, x - 1] == "")
+                    if (loadedPart[x, y] != "")
+                    {
+                        Debug.Log("Occuped: " + x + " , " + y);
+                    }
+
+                    if (loadedPart[x, y] == "")
                     {
                         //At each index add a new Vector3 to our list with the x and y coordinates of that position.
                         gridPositions.Add(new Vector3(x, y, 0f));
@@ -73,34 +78,22 @@ namespace Completed
 		
 		
 		//Sets up the outer walls and floor (background) of the game board.
-		void BoardSetup ()
+		void MakeFloor ()
 		{
 			//Instantiate Board and set boardHolder to its transform.
 			boardHolder = new GameObject ("Board").transform;
 			
 			//Loop along x axis, starting from -1 (to fill corner) with floor or outerwall edge tiles.
-			for(int x = -1; x < columns + 1; x++)
+			for(int x = 0; x < rows; x++)
 			{
 				//Loop along y axis, starting from -1 to place floor or outerwall tiles.
-				for(int y = -1; y < rows + 1; y++)
+				for(int y = 0; y < columns; y++)
 				{
-                    GameObject toInstantiate;
+                    //Choose a random tile from our array of floor tile prefabs and prepare to instantiate it.
+                    GameObject toInstantiate = floorTiles[Random.Range(0, floorTiles.Length)];
 
-                    if (x > 1 && y > 1 && x < rows && y < columns && loadedPart[x,y] != "")
-                    {
-                        toInstantiate = InstantiateObject(loadedPart[x,y]);
-                    }
-                    else
-                    {
-                        //Choose a random tile from our array of floor tile prefabs and prepare to instantiate it.
-                        toInstantiate = floorTiles[Random.Range(0, floorTiles.Length)];
-
-                        //Check if we current position is at board edge, if so choose a random outer wall prefab from our array of outer wall tiles.
-                        if (x == -1 || x == columns || y == -1 || y == rows)
-                            toInstantiate = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
-                    }
-
-                    //Instantiate the GameObject instance using the prefab chosen for toInstantiate at the Vector3 corresponding to current grid position in loop, cast it to GameObject.
+                    // Instantiate the GameObject instance using the prefab chosen for toInstantiate at the Vector3 corresponding 
+                    // to current grid position in loop, cast it to GameObject.
                     GameObject instance =
                         Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
 
@@ -154,8 +147,9 @@ namespace Completed
             // Inserts specific blocks of a level.
             LoadSpecificLevel(level);
 
-            //Creates the outer walls and floor.
-            BoardSetup ();
+            MakeFloor();
+
+            MakeOuterWall();
 
             //Reset our list of gridpositions.
             InitialiseList();
@@ -174,7 +168,28 @@ namespace Completed
 			
 			//Instantiate the exit tile in the upper right hand corner of our game board
 			Instantiate (exit, new Vector3 (columns - 1, rows - 1, 0f), Quaternion.identity);
-		}
+
+            MakeSpecialObjects();
+        }
+
+        private void MakeOuterWall()
+        {
+            for(int x= -1; x <= rows; x++){
+                for (int y = -1; y <= columns; y++) {
+                    if (x == -1 || x == columns || y == -1 || y == rows)
+                    {
+                        GameObject toInstantiate = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
+
+                        //Instantiate the GameObject instance using the prefab chosen for toInstantiate at the Vector3 corresponding to current grid position in loop, cast it to GameObject.
+                        GameObject instance =
+                            Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
+
+                        //Set the parent of our newly instantiated object instance to boardHolder, this is just organizational to avoid cluttering hierarchy.
+                        instance.transform.SetParent(boardHolder);
+                    }
+                }
+            }
+        }
 
         private void LoadSpecificLevel(int level)
         {
@@ -185,12 +200,33 @@ namespace Completed
             }
         }
 
+        private void MakeSpecialObjects() {
+            for (int x = 0; x < rows; x++)
+            {
+                //Loop along y axis, starting from -1 to place floor or outerwall tiles.
+                for (int y = 0; y < columns; y++)
+                {
+                    if (loadedPart[x, y] != "")
+                    {
+                        GameObject toInstantiate = InstantiateObject(loadedPart[x, y]);
+
+                        //Instantiate the GameObject instance using the prefab chosen for toInstantiate at the Vector3 corresponding to current grid position in loop, cast it to GameObject.
+                        GameObject instance =
+                            Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
+
+                        //Set the parent of our newly instantiated object instance to boardHolder, this is just organizational to avoid cluttering hierarchy.
+                        instance.transform.SetParent(boardHolder);
+                    }
+                }
+            }
+        }
+
         private GameObject InstantiateObject(string obj)
         {
             switch (obj)
             {
                 case WALL:
-                    return outerWallTiles[Random.Range(0, outerWallTiles.Length)];
+                    return outerWallTiles[1];
                 case TRAMP:
                     return tramp;
                 case EMPTY:

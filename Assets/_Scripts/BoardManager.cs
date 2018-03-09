@@ -4,10 +4,9 @@ using System.Collections.Generic; 		//Allows us to use Lists.
 using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine random number generator.
 
 namespace Completed
-	
 {
 	
-	public class BoardManager : MonoBehaviour
+	public partial class BoardManager : MonoBehaviour
 	{
 		// Using Serializable allows us to embed a class with sub properties in the inspector.
 		[Serializable]
@@ -36,9 +35,17 @@ namespace Completed
 		public GameObject[] foodTiles;									//Array of food prefabs.
 		public GameObject[] enemyTiles;									//Array of enemy prefabs.
 		public GameObject[] outerWallTiles;                             //Array of outer tile prefabs.
+        public GameObject tramp;
 
-        public String[,] loadedPart;
-		
+        private string[,] loadedPart;
+        private const string WALL = "Wall";
+        private const string TRAMP = "Tramp";
+        private const string LEVER = "Lever";
+        private const string ROCK = "Rock";
+        private const string LASER = "Laser";
+        private const string MIRROR = "Mirror";
+        private const string EMPTY = "Empty";
+
         private Transform boardHolder;									//A variable to store a reference to the transform of our Board object.
 		private List <Vector3> gridPositions = new List <Vector3> ();	//A list of possible locations to place tiles.
 		
@@ -52,11 +59,14 @@ namespace Completed
 			//Loop through x axis (columns).
 			for(int x = 1; x < columns-1; x++)
 			{
-				//Within each column, loop through y axis (rows).
-				for(int y = 1; y < rows-1; y++)
-				{
-					//At each index add a new Vector3 to our list with the x and y coordinates of that position.
-					gridPositions.Add (new Vector3(x, y, 0f));
+                //Within each column, loop through y axis (rows).
+                for (int y = 1; y < rows - 1; y++)
+                {
+                    if (loadedPart[y - 1, x - 1] == "")
+                    {
+                        //At each index add a new Vector3 to our list with the x and y coordinates of that position.
+                        gridPositions.Add(new Vector3(x, y, 0f));
+                    }
 				}
 			}
 		}
@@ -76,9 +86,9 @@ namespace Completed
 				{
                     GameObject toInstantiate;
 
-                    if (x > 0 && y > 0 && x < rows && y < columns && loadedPart[x, y] != null)
+                    if (x > 1 && y > 1 && x < rows && y < columns && loadedPart[x,y] != "")
                     {
-                        toInstantiate = InstantiateObject(loadedPart[x, y]);
+                        toInstantiate = InstantiateObject(loadedPart[x,y]);
                     }
                     else
                     {
@@ -99,12 +109,6 @@ namespace Completed
 				}
 			}
 		}
-
-        private GameObject InstantiateObject(string v)
-        {
-            return outerWallTiles[Random.Range(0, outerWallTiles.Length)];
-        }
-
 
         //RandomPosition returns a random position from our list gridPositions.
         Vector3 RandomPosition ()
@@ -174,12 +178,25 @@ namespace Completed
 
         private void LoadSpecificLevel(int level)
         {
-            loadedPart = new String[rows, columns];
-
             switch (level) {
                 case 1:
-                    loadedPart[5, 5] = "ROCK";
+                    loadedPart = GetLevel1();
                     break;
+            }
+        }
+
+        private GameObject InstantiateObject(string obj)
+        {
+            switch (obj)
+            {
+                case WALL:
+                    return outerWallTiles[Random.Range(0, outerWallTiles.Length)];
+                case TRAMP:
+                    return tramp;
+                case EMPTY:
+                    return floorTiles[Random.Range(0, floorTiles.Length)];
+                default:
+                    return enemyTiles[Random.Range(0, enemyTiles.Length)];
             }
         }
     }

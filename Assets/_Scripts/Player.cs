@@ -264,7 +264,8 @@ namespace Completed
         protected override void ChangeLeverState(GameObject lever)
         {
             Lever leverScript = lever.GetComponent<Lever>();
-            leverScript.ActivateLever();
+            if (leverScript.active) leverScript.DisactiveLever();
+            else leverScript.ActivateLever();
         }
     }
 }

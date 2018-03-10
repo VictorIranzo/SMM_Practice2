@@ -8,4 +8,8 @@ public class SceneTransitor : MonoBehaviour {
     public void GoToPlay() {
         SceneManager.LoadScene("Main");
     }
+
+    public void GoToSettings() {
+        SceneManager.LoadScene("Settings");
+    }
 }

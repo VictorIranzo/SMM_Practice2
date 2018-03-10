@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 namespace Completed
 {
@@ -112,12 +113,15 @@ namespace Completed
 				
 				//Call the OnCantMove function and pass it hitComponent as a parameter.
 				OnCantMove (hitComponent);
+
+            if (hit.collider.gameObject.name.Contains("Lever")) ChangeLeverState(hit.collider.gameObject);
 		}
-		
-		
-		//The abstract modifier indicates that the thing being modified has a missing or incomplete implementation.
-		//OnCantMove will be overriden by functions in the inheriting classes.
-		protected abstract void OnCantMove <T> (T component)
+
+        protected abstract void ChangeLeverState(GameObject lever);
+
+        //The abstract modifier indicates that the thing being modified has a missing or incomplete implementation.
+        //OnCantMove will be overriden by functions in the inheriting classes.
+        protected abstract void OnCantMove <T> (T component)
 			where T : Component;
 	}
 }

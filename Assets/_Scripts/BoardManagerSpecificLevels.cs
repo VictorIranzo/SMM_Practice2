@@ -5,7 +5,22 @@ namespace Completed
 {
     public partial class BoardManager : MonoBehaviour
     {
-        private string[,] GetLevel1() {
+        private string[,] GetLevel1()
+        {
+            string[,] level1 = new string[8, 8] {
+                { EMPTY, EMPTY,  EMPTY,  EMPTY,  EMPTY,  EMPTY,  WALL,  EMPTY},
+                { EMPTY,  WALL,   WALL,  EMPTY,   WALL,   WALL,  EMPTY, EMPTY},
+                { EMPTY,  WALL,  SODA,   WALL,  EMPTY,   WALL,  EMPTY,  WALL},
+                { EMPTY, EMPTY,  EMPTY,   WALL,  EMPTY,   WALL,  EMPTY, EMPTY},
+                { EMPTY,  WALL,   WALL,  EMPTY,  EMPTY,  EMPTY,   WALL, EMPTY},
+                { EMPTY,  WALL,  EMPTY,  EMPTY,   WALL,  EMPTY,   WALL, EMPTY},
+                { EMPTY,  WALL,  EMPTY,   WALL,   WALL,  EMPTY,  EMPTY, EMPTY},
+                { EMPTY, EMPTY,  EMPTY,  EMPTY,  EMPTY,   WALL,   WALL,  WALL},
+            };
+            return Transpose(InvertRows(level1));
+        }
+
+        private string[,] GetLevel2() {
             string[,] level1 = new string[8, 8] {
                 {   "",    "",     "",     "",     "",     "",     "",     ""},
                 {   "",    "",     "",     "",     "",     "",     "",     ""},
@@ -13,7 +28,7 @@ namespace Completed
                 {   "",    "",     "",  EMPTY,     "",     "",     "",     ""},
                 { WALL,  WALL,   WALL,  TRAMP,   WALL,   WALL,   WALL,   WALL},
                 {   "",    "",     "",  EMPTY,     "",     "",     "",     ""},
-                {   "",    "",  EMPTY,  EMPTY,     "",     "",     "",     ""},
+                {   "",    "",  EMPTY,  EMPTY,     "",     "",  LEVER,     ""},
                 {   "",    "",     "",     "",     "",     "",     "",     ""},
             };
             return Transpose(InvertRows(level1));

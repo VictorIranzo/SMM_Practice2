@@ -36,6 +36,7 @@ namespace Completed
 		public GameObject[] enemyTiles;									//Array of enemy prefabs.
 		public GameObject[] outerWallTiles;                             //Array of outer tile prefabs.
         public GameObject tramp;
+        public GameObject lever;
 
         private string[,] loadedPart;
         private const string WALL = "Wall";
@@ -45,6 +46,7 @@ namespace Completed
         private const string LASER = "Laser";
         private const string MIRROR = "Mirror";
         private const string EMPTY = "Empty";
+        private const string SODA = "Soda";
 
         private Transform boardHolder;									//A variable to store a reference to the transform of our Board object.
 		private List <Vector3> gridPositions = new List <Vector3> ();	//A list of possible locations to place tiles.
@@ -129,14 +131,17 @@ namespace Completed
 			//Instantiate objects until the randomly chosen limit objectCount is reached
 			for(int i = 0; i < objectCount; i++)
 			{
-				//Choose a position for randomPosition by getting a random position from our list of available Vector3s stored in gridPosition
-				Vector3 randomPosition = RandomPosition();
-				
-				//Choose a random tile from tileArray and assign it to tileChoice
-				GameObject tileChoice = tileArray[Random.Range (0, tileArray.Length)];
-				
-				//Instantiate tileChoice at the position returned by RandomPosition with no change in rotation
-				Instantiate(tileChoice, randomPosition, Quaternion.identity);
+                //Choose a position for randomPosition by getting a random position from our list of available Vector3s stored in gridPosition
+                if (gridPositions.Count > 0)
+                {
+                    Vector3 randomPosition = RandomPosition();
+
+                    //Choose a random tile from tileArray and assign it to tileChoice
+                    GameObject tileChoice = tileArray[Random.Range(0, tileArray.Length)];
+
+                    //Instantiate tileChoice at the position returned by RandomPosition with no change in rotation
+                    Instantiate(tileChoice, randomPosition, Quaternion.identity);
+                }
 			}
 		}
 		
@@ -197,6 +202,9 @@ namespace Completed
                 case 1:
                     loadedPart = GetLevel1();
                     break;
+                case 2:
+                    loadedPart = GetLevel2();
+                    break;
             }
         }
 
@@ -229,6 +237,10 @@ namespace Completed
                     return outerWallTiles[1];
                 case TRAMP:
                     return tramp;
+                case LEVER:
+                    return lever;
+                case SODA:
+                    return foodTiles[1];
                 case EMPTY:
                     return floorTiles[Random.Range(0, floorTiles.Length)];
                 default:

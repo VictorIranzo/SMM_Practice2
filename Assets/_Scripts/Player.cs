@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;	//Allows us to use UI.
 using UnityEngine.SceneManagement;
+using System;
 
 namespace Completed
 {
@@ -258,6 +259,12 @@ namespace Completed
                 //Call the GameOver function of GameManager.
                 GameManager.instance.GameOver();
             }
+        }
+
+        protected override void ChangeLeverState(GameObject lever)
+        {
+            Lever leverScript = lever.GetComponent<Lever>();
+            leverScript.ActivateLever();
         }
     }
 }

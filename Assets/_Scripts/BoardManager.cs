@@ -205,6 +205,9 @@ namespace Completed
                 case 2:
                     loadedPart = GetLevel2();
                     break;
+                ////default:
+                ////    loadedPart = new string[rows, columns];
+                ////    break;
             }
         }
 

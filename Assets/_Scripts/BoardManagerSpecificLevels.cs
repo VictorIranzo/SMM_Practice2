@@ -5,7 +5,7 @@ namespace Completed
 {
     public partial class BoardManager : MonoBehaviour
     {
-        private string[,] GetLevel2()
+        private string[,] GetLevel1()
         {
             string[,] level1 = new string[8, 8] {
                 { EMPTY, EMPTY,  EMPTY,  EMPTY,  EMPTY,  EMPTY,  WALL,  EMPTY},
@@ -20,7 +20,7 @@ namespace Completed
             return Transpose(InvertRows(level1));
         }
 
-        private string[,] GetLevel1() {
+        private string[,] GetLevel2() {
             string[,] level1 = new string[8, 8] {
                 {   "",    "",     "",     "",     "",     "",     "",     ""},
                 {   "",    "",     "",     "",     "",     "",     "",     ""},

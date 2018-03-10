@@ -11,8 +11,21 @@ namespace Completed
 		
 		void Awake ()
 		{
-			//Check if a GameManager has already been assigned to static variable GameManager.instance or if it's still null
-			if (GameManager.instance == null)
+            string selectedCharacter = DataController.GetCharacter();
+
+            if (selectedCharacter == "girl")
+            {
+                GameObject boyPlayer = GameObject.Find("Player");
+                Destroy(boyPlayer);
+            }
+            else
+            {
+                GameObject girlPlayer = GameObject.Find("Player_Girl");
+                Destroy(girlPlayer);
+            }
+
+            //Check if a GameManager has already been assigned to static variable GameManager.instance or if it's still null
+            if (GameManager.instance == null)
 				
 				//Instantiate gameManager prefab
 				Instantiate(gameManager);

@@ -7,7 +7,7 @@ using System.Linq;
 public class DataController
 {
     private static readonly string settingsDataFileName = "settings.xml";
-    private static readonly string settingsFilePath = Path.Combine(Application.streamingAssetsPath, settingsDataFileName);
+    private static readonly string settingsFilePath = Path.Combine(Application.persistentDataPath, settingsDataFileName);
 
     public static string GetCharacter()
     {

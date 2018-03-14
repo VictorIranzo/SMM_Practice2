@@ -270,6 +270,12 @@ namespace Completed
             if (leverScript.active) leverScript.DisactiveLever();
             else leverScript.ActivateLever();
         }
+
+        protected override void MoveRock(GameObject rock, int xDir, int yDir)
+        {
+            Rock rockScript = rock.GetComponent<Rock>();
+            rockScript.Move(xDir, yDir);
+        }
     }
 }
 

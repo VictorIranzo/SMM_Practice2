@@ -109,5 +109,9 @@ namespace Completed
         protected override void ChangeLeverState(GameObject lever)
         {
         }
+
+        protected override void MoveRock(GameObject rock, int xDir, int yDir)
+        {
+        }
     }
 }

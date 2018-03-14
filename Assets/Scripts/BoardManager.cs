@@ -35,8 +35,10 @@ namespace Completed
 		public GameObject[] foodTiles;									//Array of food prefabs.
 		public GameObject[] enemyTiles;									//Array of enemy prefabs.
 		public GameObject[] outerWallTiles;                             //Array of outer tile prefabs.
+
         public GameObject tramp;
         public GameObject lever;
+        public GameObject rock;
 
         public GameObject[] floorTiles_Forest;
         public GameObject[] wallTiles_Forest;
@@ -268,6 +270,8 @@ namespace Completed
                     if (skin == "rocks")
                         return floorTiles[Random.Range(0, floorTiles.Length)];
                     else return floorTiles_Forest[Random.Range(0, floorTiles_Forest.Length)];
+                case ROCK:
+                    return rock;
                 default:
                     return enemyTiles[Random.Range(0, enemyTiles.Length)];
             }

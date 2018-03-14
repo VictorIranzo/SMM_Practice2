@@ -58,7 +58,7 @@ namespace Completed
 				//Return true to say that Move was successful
 				return true;
 			}
-			
+
 			//If something was hit, return false, Move was unsuccesful.
 			return false;
 		}
@@ -115,9 +115,14 @@ namespace Completed
 				OnCantMove (hitComponent);
 
             if (hit.collider.gameObject.name.Contains("Lever")) ChangeLeverState(hit.collider.gameObject);
-		}
+            if (hit.collider.name.Contains("Rock"))
+            {
+                MoveRock(hit.collider.gameObject, xDir, yDir);
+            }
+        }
 
         protected abstract void ChangeLeverState(GameObject lever);
+        protected abstract void MoveRock(GameObject rock, int xDir, int yDir);
 
         //The abstract modifier indicates that the thing being modified has a missing or incomplete implementation.
         //OnCantMove will be overriden by functions in the inheriting classes.

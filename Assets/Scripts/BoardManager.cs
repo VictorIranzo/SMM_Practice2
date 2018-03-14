@@ -38,6 +38,10 @@ namespace Completed
         public GameObject tramp;
         public GameObject lever;
 
+        public GameObject[] floorTiles_Forest;
+        public GameObject[] wallTiles_Forest;
+        public GameObject[] outerWallTiles_Forest;
+
         private string[,] loadedPart;
         private const string WALL = "Wall";
         private const string TRAMP = "Tramp";
@@ -49,11 +53,12 @@ namespace Completed
         private const string SODA = "Soda";
 
         private Transform boardHolder;									//A variable to store a reference to the transform of our Board object.
-		private List <Vector3> gridPositions = new List <Vector3> ();	//A list of possible locations to place tiles.
-		
-		
-		//Clears our list gridPositions and prepares it to generate a new board.
-		void InitialiseList ()
+		private List <Vector3> gridPositions = new List <Vector3> ();   //A list of possible locations to place tiles.
+
+        private string skin;
+
+        //Clears our list gridPositions and prepares it to generate a new board.
+        void InitialiseList ()
 		{
 			//Clear our list gridPositions.
 			gridPositions.Clear ();
@@ -91,8 +96,16 @@ namespace Completed
 				//Loop along y axis, starting from -1 to place floor or outerwall tiles.
 				for(int y = 0; y < columns; y++)
 				{
-                    //Choose a random tile from our array of floor tile prefabs and prepare to instantiate it.
-                    GameObject toInstantiate = floorTiles[Random.Range(0, floorTiles.Length)];
+                    GameObject toInstantiate;
+
+                    if (skin == "rocks")
+                    {
+                        //Choose a random tile from our array of floor tile prefabs and prepare to instantiate it.
+                        toInstantiate = floorTiles[Random.Range(0, floorTiles.Length)];
+                    }
+                    else {
+                        toInstantiate = floorTiles_Forest[Random.Range(0, floorTiles_Forest.Length)];
+                    }
 
                     // Instantiate the GameObject instance using the prefab chosen for toInstantiate at the Vector3 corresponding 
                     // to current grid position in loop, cast it to GameObject.
@@ -149,6 +162,8 @@ namespace Completed
 		//SetupScene initializes our level and calls the previous functions to lay out the game board
 		public void SetupScene (int level)
 		{
+            skin = DataController.GetSkin(); 
+
             // Inserts specific blocks of a level.
             LoadSpecificLevel(level);
 
@@ -160,10 +175,11 @@ namespace Completed
             InitialiseList();
 			
 			//Instantiate a random number of wall tiles based on minimum and maximum, at randomized positions.
-			LayoutObjectAtRandom (wallTiles, wallCount.minimum, wallCount.maximum);
-			
-			//Instantiate a random number of food tiles based on minimum and maximum, at randomized positions.
-			LayoutObjectAtRandom (foodTiles, foodCount.minimum, foodCount.maximum);
+			if(skin=="rocks") LayoutObjectAtRandom (wallTiles, wallCount.minimum, wallCount.maximum);
+            else LayoutObjectAtRandom(wallTiles_Forest, wallCount.minimum, wallCount.maximum);
+
+            //Instantiate a random number of food tiles based on minimum and maximum, at randomized positions.
+            LayoutObjectAtRandom (foodTiles, foodCount.minimum, foodCount.maximum);
 			
 			//Determine number of enemies based on current level number, based on a logarithmic progression
 			int enemyCount = (int)Mathf.Log(level, 2f);
@@ -183,7 +199,10 @@ namespace Completed
                 for (int y = -1; y <= columns; y++) {
                     if (x == -1 || x == columns || y == -1 || y == rows)
                     {
-                        GameObject toInstantiate = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
+                        GameObject toInstantiate;
+                        if (skin=="rocks")
+                        toInstantiate = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
+                        else toInstantiate = outerWallTiles_Forest[Random.Range(0, outerWallTiles_Forest.Length)];
 
                         //Instantiate the GameObject instance using the prefab chosen for toInstantiate at the Vector3 corresponding to current grid position in loop, cast it to GameObject.
                         GameObject instance =
@@ -237,7 +256,8 @@ namespace Completed
             switch (obj)
             {
                 case WALL:
-                    return outerWallTiles[1];
+                    if (skin == "rocks") return outerWallTiles[1];
+                    else return outerWallTiles_Forest[1];
                 case TRAMP:
                     return tramp;
                 case LEVER:
@@ -245,7 +265,9 @@ namespace Completed
                 case SODA:
                     return foodTiles[1];
                 case EMPTY:
-                    return floorTiles[Random.Range(0, floorTiles.Length)];
+                    if (skin == "rocks")
+                        return floorTiles[Random.Range(0, floorTiles.Length)];
+                    else return floorTiles_Forest[Random.Range(0, floorTiles_Forest.Length)];
                 default:
                     return enemyTiles[Random.Range(0, enemyTiles.Length)];
             }

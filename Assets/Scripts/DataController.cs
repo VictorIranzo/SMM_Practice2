@@ -12,15 +12,32 @@ public class DataController
     public static string GetCharacter()
     {
         XmlDocument settingsXml = GetSettingsXml();
-        XmlNode characterNode = settingsXml.SelectSingleNode("/character");
+        XmlNode characterNode = settingsXml.SelectSingleNode("//character");
 
         return characterNode.InnerText;
     }
 
     public static void SetCharacter(string newCharacter) {
         XmlDocument settingsXml = GetSettingsXml();
-        XmlNode characterNode = settingsXml.SelectSingleNode("/character");
+        XmlNode characterNode = settingsXml.SelectSingleNode("//character");
         characterNode.InnerText = newCharacter;
+
+        settingsXml.Save(settingsFilePath);
+    }
+
+    public static string GetSkin()
+    {
+        XmlDocument settingsXml = GetSettingsXml();
+        XmlNode skinNode = settingsXml.SelectSingleNode("//skin");
+
+        return skinNode.InnerText;
+    }
+
+    public static void SetSkin(string newSkin)
+    {
+        XmlDocument settingsXml = GetSettingsXml();
+        XmlNode skinNode = settingsXml.SelectSingleNode("//skin");
+        skinNode.InnerText = newSkin;
 
         settingsXml.Save(settingsFilePath);
     }
@@ -34,9 +51,16 @@ public class DataController
             XmlNode docNode = xmlDoc.CreateXmlDeclaration("1.0", "UTF-8", null);
             xmlDoc.AppendChild(docNode);
 
+            XmlNode settingsNode = xmlDoc.CreateElement("settings");
+            xmlDoc.AppendChild(settingsNode);
+
             XmlNode characterNode = xmlDoc.CreateElement("character");
             characterNode.InnerText = "boy"; //When it's created, it's set to BOY.
-            xmlDoc.AppendChild(characterNode);
+            settingsNode.AppendChild(characterNode);
+
+            XmlNode skinNode = xmlDoc.CreateElement("skin");
+            skinNode.InnerText = "rocks";
+            settingsNode.AppendChild(skinNode);
 
             xmlDoc.Save(settingsFilePath);
         }

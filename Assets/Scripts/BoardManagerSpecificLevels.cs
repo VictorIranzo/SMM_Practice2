@@ -34,7 +34,7 @@ namespace Completed
             return Transpose(InvertRows(level1));
         }
 
-        private string[,] GetLevel1()
+        private string[,] GetLevel4()
         {
             string[,] level1 = new string[8, 8] {
                 {   "",    "",     "",     "",     "",     "",     "",     ""},
@@ -45,6 +45,21 @@ namespace Completed
                 {   "",  ROCK,     "",  EMPTY,   WALL,     "",     "",   BUTT},
                 {   "",    "",  EMPTY,  EMPTY,     "",     "",     "",   WALL},
                 {   "",    "",     "",     "",     "",     "",     "",     ""},
+            };
+            return Transpose(InvertRows(level1));
+        }
+
+        private string[,] GetLevel1()
+        {
+            string[,] level1 = new string[8, 8] {
+                {   "",    "",     "",     "",     "",     "",     "",     ""},
+                {   "",    "",     "",     "",     "",     "",     "",     ""},
+                {   "",    "",     "",  EMPTY,     "",     "",     "",     ""},
+                { WALL,  WALL,     "",  EMPTY,     "",     "",     "",   WALL},
+                {   "",    "",   WALL,  TRAMP,   WALL,   WALL,   WALL,   WALL},
+                {   "",  ROCK,     "",  EMPTY,   WALL,     "",     "",   BUTT},
+                {   "",    "",  EMPTY,  EMPTY,     "",     "",     "",   WALL},
+                {BLACK,    "",     "",     "",     "",     "",     "",     ""},
             };
             return Transpose(InvertRows(level1));
         }

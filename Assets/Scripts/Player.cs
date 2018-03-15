@@ -274,7 +274,7 @@ namespace Completed
         protected override void MoveRock(GameObject rock, int xDir, int yDir)
         {
             Rock rockScript = rock.GetComponent<Rock>();
-            rockScript.Move(xDir, yDir);
+            rockScript.MoveRock(xDir, yDir);
         }
     }
 }

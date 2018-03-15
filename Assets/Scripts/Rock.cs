@@ -1,27 +1,29 @@
-﻿using System;
+﻿using Completed;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rock : MonoBehaviour {
+public class Rock : MovingObject {
 
-    public float speed = 2.0f;
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    internal void MoveRock(int xDir, int yDir)
     {
-        Rigidbody rigidBody = hit.collider.attachedRigidbody;
-
-        if (rigidBody == null || rigidBody.isKinematic) return;
-
-        Vector2 pushVector = new Vector2(hit.moveDirection.x, hit.moveDirection.y);
-
-        this.transform.position = new Vector3(hit.moveDirection.x*speed, hit.moveDirection.y*speed, 0);
+        RaycastHit2D hit;
+        Move(xDir,yDir, out hit);
     }
 
-    internal void Move(int xDir, int yDir)
+    protected override void ChangeLeverState(GameObject lever)
     {
-        //this.transform.position = this.transform.position + new Vector3(xDir,yDir,0);
+        throw new NotImplementedException();
+    }
 
-        Rigidbody2D rigidbody = this.GetComponent<Rigidbody2D>();
-        rigidbody.AddForceAtPosition(new Vector3(xDir, yDir),new Vector2(this.transform.position.x,this.transform.position.y));
+    protected override void MoveRock(GameObject rock, int xDir, int yDir)
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override void OnCantMove<T>(T component)
+    {
+        throw new NotImplementedException();
     }
 }

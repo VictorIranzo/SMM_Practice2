@@ -39,6 +39,7 @@ namespace Completed
         public GameObject tramp;
         public GameObject lever;
         public GameObject rock;
+        public GameObject button;
 
         public GameObject[] floorTiles_Forest;
         public GameObject[] wallTiles_Forest;
@@ -49,8 +50,7 @@ namespace Completed
         private const string TRAMP = "Tramp";
         private const string LEVER = "Lever";
         private const string ROCK = "Rock";
-        private const string LASER = "Laser";
-        private const string MIRROR = "Mirror";
+        private const string BUTT = "Button";
         private const string EMPTY = "Empty";
         private const string SODA = "Soda";
 
@@ -264,6 +264,8 @@ namespace Completed
                     return tramp;
                 case LEVER:
                     return lever;
+                case BUTT:
+                    return button;
                 case SODA:
                     return foodTiles[1];
                 case EMPTY:

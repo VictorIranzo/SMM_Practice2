@@ -28,7 +28,7 @@ namespace Completed
                 {   "",    "",     "",  EMPTY,     "",     "",     "",   WALL},
                 { WALL,  WALL,   WALL,  TRAMP,   WALL,   WALL,   WALL,   WALL},
                 {   "",    "",     "",  EMPTY,     "",     "",     "",     ""},
-                {   "",    "",  EMPTY,  EMPTY,   ROCK,     "",  LEVER,     ""},
+                {   "",    "",  EMPTY,  EMPTY,   ROCK,     "",     "",     ""},
                 {   "",    "",     "",     "",     "",     "",     "",     ""},
             };
             return Transpose(InvertRows(level1));

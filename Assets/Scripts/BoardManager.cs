@@ -41,6 +41,7 @@ namespace Completed
         public GameObject rock;
         public GameObject button;
         public GameObject black;
+        public GameObject fakeLever;
 
         public GameObject[] floorTiles_Forest;
         public GameObject[] wallTiles_Forest;
@@ -53,6 +54,7 @@ namespace Completed
         private const string ROCK = "Rock";
         private const string BUTT = "Button";
         private const string BLACK = "Black";
+        private const string FAKE = "FakeLever";
         private const string EMPTY = "Empty";
         private const string SODA = "Soda";
 
@@ -278,6 +280,8 @@ namespace Completed
                     return rock;
                 case BLACK:
                     return black;
+                case FAKE:
+                    return fakeLever;
                 default:
                     return enemyTiles[Random.Range(0, enemyTiles.Length)];
             }

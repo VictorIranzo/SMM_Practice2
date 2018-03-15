@@ -266,9 +266,18 @@ namespace Completed
 
         protected override void ChangeLeverState(GameObject lever)
         {
-            Lever leverScript = lever.GetComponent<Lever>();
-            if (leverScript.active) leverScript.DisactiveLever();
-            else leverScript.ActivateLever();
+            if (lever.name.StartsWith("Lever"))
+            {
+                Lever leverScript = lever.GetComponent<Lever>();
+                if (leverScript.active) leverScript.DisactiveLever();
+                else leverScript.ActivateLever();
+            }
+            else {
+                // It is a fake
+                FakeLever leverScript = lever.GetComponent<FakeLever>();
+                if (leverScript.active) leverScript.DisactiveLever();
+                else leverScript.ActivateLever();
+            }
         }
 
         protected override void MoveRock(GameObject rock, int xDir, int yDir)

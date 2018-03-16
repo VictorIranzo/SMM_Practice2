@@ -8,19 +8,33 @@ namespace Completed
         private string[,] GetLevel3()
         {
             string[,] level3 = new string[8, 8] {
-                {EMPTY,    WALL,   EMPTY,    WALL,   EMPTY,  EMPTY,  EMPTY,  EMPTY},
-                { SODA,    WALL,   EMPTY,    WALL,   SODA,   ROCK,  ROCK,   EMPTY},
-                {EMPTY,    WALL,    ROCK,   EMPTY,   WALL,  EMPTY,  EMPTY,   WALL},
-                {EMPTY,    ROCK,   EMPTY,   EMPTY,   ROCK,  EMPTY,  EMPTY,  EMPTY},
-                {EMPTY,    WALL,    WALL,   EMPTY,   WALL,   WALL,   ROCK,   WALL},
-                {EMPTY,    WALL,   EMPTY,   EMPTY,   WALL,  EMPTY,   EMPTY, EMPTY},
-                {EMPTY,    WALL,   EMPTY,   EMPTY,   WALL,  EMPTY,   EMPTY, EMPTY},
-                {EMPTY,    WALL,    SODA,    WALL,   SODA,  TRAMP,   EMPTY,   BUTT},
-            }; 
+                {   "",      "",     "",       "",    "",     "",  SENS,   ""},
+                {   "",      "",     "",       "",    "",     "",    "", SENS},
+                {   "",      "",     "",       "",    "",     "",    "",   ""},
+                {   "",      "",     "",       "",    "",     "",    "",   ""},
+                {   "",      "",     "",       "",    "",     "",    "",   ""},
+                {   "",      "",  EMPTY,      "",    "",      "",    "",   ""},
+                {   "",      "",     "",      "",    "",      "",    "",   ""},
+                { EMPTY,     "",     "",      "",    "",      "",    "",   ""},
+            };
             return Transpose(InvertRows(level3));
         }
 
-
+        private string[,] GetLevel4()
+        {
+            string[,] level4 = new string[8, 8] {
+                {EMPTY,    WALL,   EMPTY,    WALL,  EMPTY,  EMPTY,  EMPTY,  EMPTY},
+                { SODA,    WALL,   EMPTY,    WALL,   SODA,   ROCK,   ROCK,  EMPTY},
+                {EMPTY,    WALL,    ROCK,   EMPTY,   WALL,  EMPTY,  EMPTY,   WALL},
+                {EMPTY,    ROCK,   EMPTY,   EMPTY,   ROCK,  EMPTY,  EMPTY,  EMPTY},
+                {EMPTY,    WALL,    WALL,   EMPTY,   WALL,   WALL,   ROCK,   WALL},
+                {EMPTY,    WALL,   EMPTY,   EMPTY,   WALL,  EMPTY,  EMPTY,  EMPTY},
+                {EMPTY,    WALL,   EMPTY,   EMPTY,   WALL,  EMPTY,  EMPTY,  EMPTY},
+                {EMPTY,    WALL,    SODA,    WALL,   SODA,  TRAMP,  EMPTY,   BUTT},
+            }; 
+            return Transpose(InvertRows(level4));
+        }
+  
         private string[,] GetLevel5()
         {
             string[,] level5 = new string[8, 8] {
@@ -57,10 +71,10 @@ namespace Completed
                 {   "",    "",     "",     "",     "",     "",     "",     ""},
                 {   "",    "",     "",  EMPTY,     "",     "",     "",     ""},
                 { WALL,  WALL,     "",  EMPTY,     "",     "",     "",   WALL},
-                {   EMPTY,    SODA,   WALL,  TRAMP,   WALL,   WALL,   WALL,   WALL},
-                {   EMPTY,  ROCK,     EMPTY,  EMPTY,   WALL,     EMPTY,     EMPTY,   BUTT},
-                {   EMPTY,    EMPTY,  EMPTY,  EMPTY,     EMPTY,     EMPTY,     EMPTY,   WALL},
-                {   EMPTY,    EMPTY,     EMPTY,     EMPTY,     EMPTY,     EMPTY,     EMPTY,     EMPTY},
+                {EMPTY,  SODA,   WALL,  TRAMP,   WALL,   WALL,   WALL,   WALL},
+                {EMPTY,  ROCK,  EMPTY,  EMPTY,   WALL,  EMPTY,  EMPTY,   BUTT},
+                {EMPTY, EMPTY,  EMPTY,  EMPTY,  EMPTY,  EMPTY,  EMPTY,   WALL},
+                {EMPTY,  EMPTY,  EMPTY,  EMPTY, EMPTY,   EMPTY,  EMPTY,  EMPTY},
             };
             return Transpose(InvertRows(level8));
         }
@@ -83,7 +97,7 @@ namespace Completed
         private string[,] GetLevel10()
         {
             string[,] level10 = new string[8, 8] {
-                {   EMPTY,    EMPTY,   SODA,     EMPTY,  TRAMP,  EMPTY,     EMPTY,     EMPTY},
+                { EMPTY, EMPTY, SODA,  EMPTY, TRAMP, EMPTY,  EMPTY,     EMPTY},
                 { SODA,    EMPTY,   ROCK,   BUTT,   WALL,   WALL,   WALL,   ROCK},
                 {EMPTY, EMPTY,   ROCK,  EMPTY,     EMPTY,     EMPTY,  EMPTY,     EMPTY},
                 { WALL,  WALL,     EMPTY,  EMPTY,     EMPTY,     EMPTY,  EMPTY,   WALL},

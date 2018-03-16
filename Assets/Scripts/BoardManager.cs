@@ -42,6 +42,7 @@ namespace Completed
         public GameObject button;
         public GameObject black;
         public GameObject fakeLever;
+        public GameObject sensor;
 
         public GameObject[] floorTiles_Forest;
         public GameObject[] wallTiles_Forest;
@@ -57,6 +58,7 @@ namespace Completed
         private const string FAKE = "FakeLever";
         private const string EMPTY = "Empty";
         private const string SODA = "Soda";
+        private const string SENS = "SENSOR";
 
         private Transform boardHolder;									//A variable to store a reference to the transform of our Board object.
 		private List <Vector3> gridPositions = new List <Vector3> ();   //A list of possible locations to place tiles.
@@ -226,6 +228,9 @@ namespace Completed
                 case 3:
                     loadedPart = GetLevel3();
                     break;
+                case 4:
+                    loadedPart = GetLevel4();
+                    break;
                 case 5:
                     loadedPart = GetLevel5();
                     break;
@@ -293,6 +298,8 @@ namespace Completed
                     return black;
                 case FAKE:
                     return fakeLever;
+                case SENS:
+                    return sensor;
                 default: return null;
             }
         }

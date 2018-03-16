@@ -75,12 +75,11 @@ namespace Completed
                 //Within each column, loop through y axis (rows).
                 for (int y = 0; y < columns; y++)
                 {
-                    if (loadedPart[x, y] != "")
+                    if (loadedPart[x, y] != "" && loadedPart[x, y] != null)
                     {
                         Debug.Log("Occuped: " + x + " , " + y);
                     }
-
-                    if (loadedPart[x, y] == "")
+                    else
                     {
                         //At each index add a new Vector3 to our list with the x and y coordinates of that position.
                         gridPositions.Add(new Vector3(x, y, 0f));
@@ -224,15 +223,27 @@ namespace Completed
         private void LoadSpecificLevel(int level)
         {
             switch (level) {
-                case 1:
-                    loadedPart = GetLevel1();
+                case 3:
+                    loadedPart = GetLevel3();
                     break;
-                case 2:
-                    loadedPart = GetLevel2();
+                case 5:
+                    loadedPart = GetLevel5();
                     break;
-                ////default:
-                ////    loadedPart = new string[rows, columns];
-                ////    break;
+                case 6:
+                    loadedPart = GetLevel6();
+                    break;
+                case 8:
+                    loadedPart = GetLevel8();
+                    break;
+                case 9:
+                    loadedPart = GetLevel9();
+                    break;
+                case 10:
+                    loadedPart = GetLevel10();
+                    break;
+                default:
+                    loadedPart = new string[rows, columns];
+                    break;
             }
         }
 
@@ -242,7 +253,7 @@ namespace Completed
                 //Loop along y axis, starting from -1 to place floor or outerwall tiles.
                 for (int y = 0; y < columns; y++)
                 {
-                    if (loadedPart[x, y] != "")
+                    if (loadedPart[x, y] != "" && loadedPart[x, y] != null)
                     {
                         GameObject toInstantiate = InstantiateObject(loadedPart[x, y]);
 
@@ -282,8 +293,7 @@ namespace Completed
                     return black;
                 case FAKE:
                     return fakeLever;
-                default:
-                    return enemyTiles[Random.Range(0, enemyTiles.Length)];
+                default: return null;
             }
         }
     }

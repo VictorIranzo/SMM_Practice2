@@ -5,25 +5,25 @@ namespace Completed
 {
     public partial class BoardManager : MonoBehaviour
     {
-        private string[,] GetLevel1()
+        private string[,] GetLevel3()
         {
-            string[,] level1 = new string[8, 8] {
-                {EMPTY,    WALL,   EMPTY,    WALL,     "",  EMPTY,     "",     ""},
+            string[,] level3 = new string[8, 8] {
+                {EMPTY,    WALL,   EMPTY,    WALL,   EMPTY,  EMPTY,  EMPTY,  EMPTY},
                 { SODA,    WALL,   EMPTY,    WALL,   SODA,   ROCK,  ROCK,   EMPTY},
-                {EMPTY,    WALL,    ROCK,   EMPTY,   WALL,     "",  EMPTY,   WALL},
+                {EMPTY,    WALL,    ROCK,   EMPTY,   WALL,  EMPTY,  EMPTY,   WALL},
                 {EMPTY,    ROCK,   EMPTY,   EMPTY,   ROCK,  EMPTY,  EMPTY,  EMPTY},
                 {EMPTY,    WALL,    WALL,   EMPTY,   WALL,   WALL,   ROCK,   WALL},
-                {EMPTY,    WALL,      "",   EMPTY,   WALL,     "",   EMPTY, EMPTY},
-                {EMPTY,    WALL,      "",   EMPTY,   WALL,     "",   EMPTY, EMPTY},
-                {EMPTY,    WALL,    SODA,    WALL,   SODA,  TRAMP,     "",   BUTT},
+                {EMPTY,    WALL,   EMPTY,   EMPTY,   WALL,  EMPTY,   EMPTY, EMPTY},
+                {EMPTY,    WALL,   EMPTY,   EMPTY,   WALL,  EMPTY,   EMPTY, EMPTY},
+                {EMPTY,    WALL,    SODA,    WALL,   SODA,  TRAMP,   EMPTY,   BUTT},
             }; 
-            return Transpose(InvertRows(level1));
+            return Transpose(InvertRows(level3));
         }
 
 
-        private string[,] GetLevel2()
+        private string[,] GetLevel5()
         {
-            string[,] level1 = new string[8, 8] {
+            string[,] level5 = new string[8, 8] {
                 { EMPTY, EMPTY,  EMPTY,  EMPTY,  EMPTY,  EMPTY,  WALL,  EMPTY},
                 { EMPTY,  WALL,   WALL,  EMPTY,   WALL,   WALL,  EMPTY, EMPTY},
                 { EMPTY,  WALL,  SODA,   WALL,  EMPTY,   WALL,  EMPTY,  WALL},
@@ -33,11 +33,11 @@ namespace Completed
                 { EMPTY,  WALL,  EMPTY,   WALL,   WALL,  EMPTY,  EMPTY, EMPTY},
                 { EMPTY, EMPTY,  EMPTY,  EMPTY,  EMPTY,   WALL,   WALL,  WALL},
             };
-            return Transpose(InvertRows(level1));
+            return Transpose(InvertRows(level5));
         }
 
-        private string[,] GetLevel3() {
-            string[,] level1 = new string[8, 8] {
+        private string[,] GetLevel6() {
+            string[,] level6 = new string[8, 8] {
                 {   "",    "",     "",     "",     "",     "",     "",     ""},
                 {   "",    "",     "",     "",     "",     "",     "",     ""},
                 {   "",    "",     "",  EMPTY,     "",     "",     "",     ""},
@@ -47,27 +47,27 @@ namespace Completed
                 {   "",    "",  EMPTY,  EMPTY,     "",     "",  LEVER,     ""},
                 {   "",    "",     "",     "",     "",     "",     "",     ""},
             };
-            return Transpose(InvertRows(level1));
+            return Transpose(InvertRows(level6));
         }
 
-        private string[,] GetLevel4()
+        private string[,] GetLevel8()
         {
-            string[,] level1 = new string[8, 8] {
+            string[,] level8 = new string[8, 8] {
                 {   "",    "",     "",     "",     "",     "",     "",     ""},
                 {   "",    "",     "",     "",     "",     "",     "",     ""},
                 {   "",    "",     "",  EMPTY,     "",     "",     "",     ""},
                 { WALL,  WALL,     "",  EMPTY,     "",     "",     "",   WALL},
-                {   "",    "",   WALL,  TRAMP,   WALL,   WALL,   WALL,   WALL},
-                {   "",  ROCK,     "",  EMPTY,   WALL,     "",     "",   BUTT},
-                {   "",    "",  EMPTY,  EMPTY,     "",     "",     "",   WALL},
-                {   "",    "",     "",     "",     "",     "",     "",     ""},
+                {   EMPTY,    SODA,   WALL,  TRAMP,   WALL,   WALL,   WALL,   WALL},
+                {   EMPTY,  ROCK,     EMPTY,  EMPTY,   WALL,     EMPTY,     EMPTY,   BUTT},
+                {   EMPTY,    EMPTY,  EMPTY,  EMPTY,     EMPTY,     EMPTY,     EMPTY,   WALL},
+                {   EMPTY,    EMPTY,     EMPTY,     EMPTY,     EMPTY,     EMPTY,     EMPTY,     EMPTY},
             };
-            return Transpose(InvertRows(level1));
+            return Transpose(InvertRows(level8));
         }
 
-        private string[,] GetLevel5()
+        private string[,] GetLevel9()
         {
-            string[,] level1 = new string[8, 8] {
+            string[,] level9 = new string[8, 8] {
                 {   "",    "",     "",     "",     "",   WALL,     "",     ""},
                 {   "",  FAKE,  LEVER,     "",     "",   FAKE,  TRAMP,   WALL},
                 {   "",    "",   ROCK,     "",     "",     "",     "",   WALL},
@@ -77,22 +77,22 @@ namespace Completed
                 {   "",    "",     "",     "",     "",   FAKE,     "",   WALL},
                 {EMPTY,    "",     "",     "",     "",     "",     "",     ""},
             };
-            return Transpose(InvertRows(level1));
+            return Transpose(InvertRows(level9));
         }
 
-        private string[,] GetLevel6()
+        private string[,] GetLevel10()
         {
-            string[,] level1 = new string[8, 8] {
-                {   "",    "",   SODA,     "",  TRAMP,  EMPTY,     "",     ""},
-                { SODA,    "",   ROCK,   BUTT,   WALL,   WALL,   WALL,   ROCK},
-                {EMPTY, EMPTY,   ROCK,  EMPTY,     "",     "",  EMPTY,     ""},
-                { WALL,  WALL,     "",  EMPTY,     "",     "",  EMPTY,   WALL},
-                {   "",    "",   WALL,   WALL,   WALL,   WALL,   ROCK,   WALL},
-                {   "",  ROCK,     "",  EMPTY,   WALL,     "",     "",   SODA},
-                {   "",    "",     "",     "",     "",   WALL,     "",   WALL},
-                {BLACK,    "",     "",     "",     "",     "",     "",     ""},
+            string[,] level10 = new string[8, 8] {
+                {   EMPTY,    EMPTY,   SODA,     EMPTY,  TRAMP,  EMPTY,     EMPTY,     EMPTY},
+                { SODA,    EMPTY,   ROCK,   BUTT,   WALL,   WALL,   WALL,   ROCK},
+                {EMPTY, EMPTY,   ROCK,  EMPTY,     EMPTY,     EMPTY,  EMPTY,     EMPTY},
+                { WALL,  WALL,     EMPTY,  EMPTY,     EMPTY,     EMPTY,  EMPTY,   WALL},
+                {   EMPTY,    EMPTY,   WALL,   WALL,   WALL,   WALL,   ROCK,   WALL},
+                {   EMPTY,  ROCK,     EMPTY,  EMPTY,   WALL,     EMPTY,     EMPTY,   SODA},
+                {   EMPTY,    EMPTY,     EMPTY,     EMPTY,     EMPTY,   WALL,     EMPTY,   WALL},
+                {BLACK,    EMPTY,     EMPTY,     EMPTY,     EMPTY,     EMPTY,     EMPTY,     EMPTY},
             };
-            return Transpose(InvertRows(level1));
+            return Transpose(InvertRows(level10));
         }
 
         private string[,] InvertRows(string[,] matrix)

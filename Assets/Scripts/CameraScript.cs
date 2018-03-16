@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CameraScript : MonoBehaviour {
@@ -16,7 +17,9 @@ public class CameraScript : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        Skybox skybox = this.GetComponent<Skybox>();
         string selectedCharacter = DataController.GetCharacter();
+        string skin = DataController.GetSkin();
 
         if (selectedCharacter == "girl")
         {
@@ -25,6 +28,17 @@ public class CameraScript : MonoBehaviour {
         else
         {
             player = GameObject.Find("Player").transform;
+        }
+
+        IEnumerable<Material> materiales = Resources.FindObjectsOfTypeAll(typeof(Material)).Cast<Material>();
+
+        if (skin == "rocks")
+        {
+            skybox.material = materiales.Where(s=> s.name.Contains("Mina")).FirstOrDefault();
+        }
+        else
+        {
+            skybox.material = materiales.Where(s => s.name.Contains("Cesped")).FirstOrDefault();
         }
 
         AdjustScreenSize();

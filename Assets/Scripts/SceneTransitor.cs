@@ -12,4 +12,9 @@ public class SceneTransitor : MonoBehaviour {
     public void GoToSettings() {
         SceneManager.LoadScene("Settings");
     }
+
+    public void GoToMenu()
+    {
+        SceneManager.LoadScene("Menu2D");
+    }
 }

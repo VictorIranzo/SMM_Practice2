@@ -26,7 +26,7 @@ namespace Completed
         private bool enemiesMoving;                             //Boolean to check if enemies are moving.
         private bool doingSetup = true;                         //Boolean to check if we're setting up board, prevent Player from moving during setup.
 
-
+        private CounterScript counter;
 
         //Awake is always called before any Start functions
         void Awake()
@@ -75,10 +75,12 @@ namespace Completed
             if (firstRun)
             {
                 firstRun = false;
+                counter = GameObject.Find("Counter").GetComponent<CounterScript>();
                 return;
             }
 
             level++;
+            counter.RestartCounter();
             InitGame();
         }
 
@@ -95,7 +97,7 @@ namespace Completed
             levelText = GameObject.Find("LevelText").GetComponent<Text>();
 
             //Set the text of levelText to the string "Day" and append the current level number.
-            levelText.text = "Day " + level;
+            levelText.text = "Level " + level;
 
             //Set levelImage to active blocking player's view of the game board during setup.
             levelImage.SetActive(true);
@@ -108,7 +110,6 @@ namespace Completed
 
             //Call the SetupScene function of the BoardManager script, pass it current level number.
             boardScript.SetupScene(level);
-
         }
 
 
@@ -147,7 +148,7 @@ namespace Completed
         public void GameOver()
         {
             //Set levelText to display number of levels passed and game over message
-            levelText.text = "After " + level + " days, you starved.";
+            levelText.text = "After " + level + " levels, you starved.";
 
             //Enable black background image gameObject.
             levelImage.SetActive(true);

@@ -27,6 +27,8 @@ namespace Completed
         private bool doingSetup = true;                         //Boolean to check if we're setting up board, prevent Player from moving during setup.
 
         private CounterScript counter;
+        private bool firstRun = true;
+        [HideInInspector] public bool gameEnd;
 
         //Awake is always called before any Start functions
         void Awake()
@@ -56,8 +58,6 @@ namespace Completed
             InitGame();
         }
 
-        private bool firstRun = true;
-
         void OnEnable()
         {
             //Tell our 'OnLevelFinishedLoading' function to start listening for a scene change as soon as this script is enabled.
@@ -74,14 +74,22 @@ namespace Completed
         {
             if (firstRun)
             {
+                gameEnd = false;
                 firstRun = false;
                 counter = GameObject.Find("Counter").GetComponent<CounterScript>();
                 return;
             }
-
-            level++;
-            counter.RestartCounter();
-            InitGame();
+            if (!gameEnd)
+            {
+                level++;
+                counter.RestartCounter();
+                InitGame();
+            }
+            else {
+                gameEnd = false;
+                level = 0;
+                SoundManager.instance.Destroy();
+            }
         }
 
         //Initializes the game for each level.

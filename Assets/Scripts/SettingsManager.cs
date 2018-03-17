@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class SettingsManager : MonoBehaviour {
 
-    public Button girlPlayer;
-    public Button boyPlayer;
+    public UnityEngine.UI.Button girlPlayer;
+    public UnityEngine.UI.Button boyPlayer;
 
     public Sprite girlSelected;
     public Sprite girlUnselected;

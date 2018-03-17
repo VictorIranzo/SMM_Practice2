@@ -14,6 +14,9 @@ public class CameraScript : MonoBehaviour {
 
     private float TARGET_WIDTH, TARGET_HEIGHT;
 
+    public Material Skybox_Cave;
+    public Material Skybox_Forest;
+
     // Use this for initialization
     void Start()
     {
@@ -30,15 +33,13 @@ public class CameraScript : MonoBehaviour {
             player = GameObject.Find("Player").transform;
         }
 
-        IEnumerable<Material> materiales = Resources.FindObjectsOfTypeAll(typeof(Material)).Cast<Material>();
-
         if (skin == "rocks")
         {
-            skybox.material = materiales.Where(s=> s.name.Contains("Mina")).FirstOrDefault();
+            skybox.material = Skybox_Cave;
         }
         else
         {
-            skybox.material = materiales.Where(s => s.name.Contains("Cesped")).FirstOrDefault();
+            skybox.material = Skybox_Forest;
         }
 
         AdjustScreenSize();

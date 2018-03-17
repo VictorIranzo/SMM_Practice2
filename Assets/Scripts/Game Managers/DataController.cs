@@ -9,6 +9,23 @@ public class DataController
     private static readonly string settingsDataFileName = "settings.xml";
     private static readonly string settingsFilePath = Path.Combine(Application.persistentDataPath, settingsDataFileName);
 
+    public static string GetUser()
+    {
+        XmlDocument settingsXml = GetSettingsXml();
+        XmlNode userNode = settingsXml.SelectSingleNode("//user");
+
+        return userNode.InnerText;
+    }
+
+    public static void SetUser(string newUser)
+    {
+        XmlDocument settingsXml = GetSettingsXml();
+        XmlNode userNode = settingsXml.SelectSingleNode("//user");
+        userNode.InnerText = newUser;
+
+        settingsXml.Save(settingsFilePath);
+    }
+
     public static string GetCharacter()
     {
         XmlDocument settingsXml = GetSettingsXml();
@@ -61,6 +78,10 @@ public class DataController
             XmlNode skinNode = xmlDoc.CreateElement("skin");
             skinNode.InnerText = "rocks";
             settingsNode.AppendChild(skinNode);
+
+            XmlNode userNode = xmlDoc.CreateElement("user");
+            userNode.InnerText = "user";
+            settingsNode.AppendChild(userNode);
 
             xmlDoc.Save(settingsFilePath);
         }

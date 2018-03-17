@@ -3,11 +3,16 @@ using System.IO;
 using System.Xml;
 using UnityEngine;
 using System.Linq;
+using System.Xml.Serialization;
+using System;
 
 public class DataController
 {
     private static readonly string settingsDataFileName = "settings.xml";
     private static readonly string settingsFilePath = Path.Combine(Application.persistentDataPath, settingsDataFileName);
+
+    private static readonly string scoresDataFileName = "scores.xml";
+    private static readonly string scoresFilePath = Path.Combine(Application.persistentDataPath, scoresDataFileName);
 
     public static string GetUser()
     {
@@ -44,6 +49,7 @@ public class DataController
 
     public static string GetSkin()
     {
+        AddScores();
         XmlDocument settingsXml = GetSettingsXml();
         XmlNode skinNode = settingsXml.SelectSingleNode("//skin");
 
@@ -91,5 +97,33 @@ public class DataController
         }
 
         return xmlDoc;
+    }
+
+    public static void ReadScores()
+    {
+        XmlSerializer xmlSerializer = new XmlSerializer(typeof(Scores));
+        FileStream fileStream = new FileStream(scoresFilePath, FileMode.Open);
+
+        Scores scores = (Scores) xmlSerializer.Deserialize(fileStream);
+    }
+
+    public static void AddScores()
+    {
+        Scores scores = new Scores();
+        string[] names = new string[] { "Pepe", "Paco", "Mario" };
+        foreach (string name in names)
+        {
+            scores.scores.Add(new Score() {
+                dateTime = DateTime.Now,
+                score = 200,
+                user = name
+            });
+        }
+
+        XmlSerializer xmlSerializer = new XmlSerializer(typeof(Scores));
+        StreamWriter streamWriter = new StreamWriter(scoresFilePath);
+
+        xmlSerializer.Serialize(streamWriter,scores);
+        streamWriter.Close();
     }
 }

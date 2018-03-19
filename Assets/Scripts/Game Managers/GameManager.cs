@@ -163,6 +163,8 @@ namespace Completed
 
             //Disable this GameManager.
             enabled = false;
+
+            PointsManager.instance.SaveScore();
         }
 
         //Coroutine to move enemies in sequence.

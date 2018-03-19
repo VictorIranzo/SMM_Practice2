@@ -21,7 +21,10 @@ public class SceneTransitor : MonoBehaviour {
 
     public void GoToMenu()
     {
+        PointsManager.instance.SaveScore();
+
         SceneManager.LoadScene("Menu2D");
+
         GameManager.instance.gameEnd = true;
     }
 

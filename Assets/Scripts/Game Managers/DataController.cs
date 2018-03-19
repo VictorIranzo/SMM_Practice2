@@ -104,23 +104,21 @@ public class DataController
         FileStream fileStream = new FileStream(scoresFilePath, FileMode.Open);
 
         Scores scores = (Scores) xmlSerializer.Deserialize(fileStream);
+        fileStream.Close();
 
         return scores;
     }
 
-    public static void AddScores()
+    public static void AddScore(int points)
     {
-        // TODO: This is a test method.
-        Scores scores = new Scores();
-        string[] names = new string[] { "Pepe", "Paco", "Mario" };
-        foreach (string name in names)
-        {
-            scores.scores.Add(new Score() {
-                dateTime = DateTime.Now,
-                score = 200,
-                user = name
-            });
-        }
+        Scores scores = ReadScores();
+        string user = DataController.GetUser();
+
+        scores.scores.Add(new Score() {
+            user = user,
+            dateTime = DateTime.Now,
+            score = points
+        });
 
         XmlSerializer xmlSerializer = new XmlSerializer(typeof(Scores));
         StreamWriter streamWriter = new StreamWriter(scoresFilePath);

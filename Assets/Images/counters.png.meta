@@ -1,11 +1,12 @@
 fileFormatVersion: 2
 guid: 2b3435cdb39d68a4da39e6667a10a1da
-timeCreated: 1521162661
+timeCreated: 1521491850
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: counters_0
     21300002: counters_1
+    21300004: counters_2
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -105,10 +106,10 @@ TextureImporter:
       name: counters_0
       rect:
         serializedVersion: 2
-        x: 52
-        y: 220
-        width: 530
-        height: 172
+        x: 0
+        y: 400
+        width: 600
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,10 +120,24 @@ TextureImporter:
       name: counters_1
       rect:
         serializedVersion: 2
-        x: 48
-        y: 18
-        width: 531
-        height: 170
+        x: 0
+        y: 200
+        width: 600
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: counters_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 600
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

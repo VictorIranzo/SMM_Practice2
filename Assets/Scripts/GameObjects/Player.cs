@@ -23,7 +23,7 @@ namespace Completed
         public AudioClip gameOverSound;             //Audio clip to play when player dies.
 
         private Animator animator;                  //Used to store a reference to the Player's animator component.
-        private int food;                           //Used to store player food points total during level.
+        [HideInInspector] public int food;                           //Used to store player food points total during level.
         private Vector2 touchOrigin = -Vector2.one; //Used to store location of screen touch origin for mobile controls.
 
 
@@ -180,6 +180,8 @@ namespace Completed
             //Check if the tag of the trigger collided with is Exit.
             if (other.tag == "Exit")
             {
+                PointsManager.instance.UpdatePoints();
+
                 //Invoke the Restart function to start the next level with a delay of restartLevelDelay (default 1 second).
                 Invoke("Restart", restartLevelDelay);
 

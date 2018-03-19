@@ -49,7 +49,6 @@ public class DataController
 
     public static string GetSkin()
     {
-        AddScores();
         XmlDocument settingsXml = GetSettingsXml();
         XmlNode skinNode = settingsXml.SelectSingleNode("//skin");
 
@@ -99,16 +98,19 @@ public class DataController
         return xmlDoc;
     }
 
-    public static void ReadScores()
+    public static Scores ReadScores()
     {
         XmlSerializer xmlSerializer = new XmlSerializer(typeof(Scores));
         FileStream fileStream = new FileStream(scoresFilePath, FileMode.Open);
 
         Scores scores = (Scores) xmlSerializer.Deserialize(fileStream);
+
+        return scores;
     }
 
     public static void AddScores()
     {
+        // TODO: This is a test method.
         Scores scores = new Scores();
         string[] names = new string[] { "Pepe", "Paco", "Mario" };
         foreach (string name in names)

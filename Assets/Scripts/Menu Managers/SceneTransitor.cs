@@ -14,9 +14,19 @@ public class SceneTransitor : MonoBehaviour {
         SceneManager.LoadScene("Settings");
     }
 
+    public void GoToScores()
+    {
+        SceneManager.LoadScene("Scores");
+    }
+
     public void GoToMenu()
     {
         SceneManager.LoadScene("Menu2D");
         GameManager.instance.gameEnd = true;
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
     }
 }

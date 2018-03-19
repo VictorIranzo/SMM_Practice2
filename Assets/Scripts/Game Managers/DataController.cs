@@ -14,11 +14,19 @@ public class DataController
     private static readonly string scoresDataFileName = "scores.xml";
     private static readonly string scoresFilePath = Path.Combine(Application.persistentDataPath, scoresDataFileName);
 
+    private static string user = null;
+    private static string skin = null;
+    private static string character = null;
+    private static Scores scoresCache = null;
+
     public static string GetUser()
     {
+        if (user != null) return user;
+
         XmlDocument settingsXml = GetSettingsXml();
         XmlNode userNode = settingsXml.SelectSingleNode("//user");
 
+        user = userNode.InnerText;
         return userNode.InnerText;
     }
 
@@ -29,13 +37,18 @@ public class DataController
         userNode.InnerText = newUser;
 
         settingsXml.Save(settingsFilePath);
+
+        user = newUser;
     }
 
     public static string GetCharacter()
     {
+        if (character != null) return character;
+
         XmlDocument settingsXml = GetSettingsXml();
         XmlNode characterNode = settingsXml.SelectSingleNode("//character");
 
+        character = characterNode.InnerText;
         return characterNode.InnerText;
     }
 
@@ -45,13 +58,18 @@ public class DataController
         characterNode.InnerText = newCharacter;
 
         settingsXml.Save(settingsFilePath);
+
+        character = newCharacter;
     }
 
     public static string GetSkin()
     {
+        if (skin != null) return skin;
+
         XmlDocument settingsXml = GetSettingsXml();
         XmlNode skinNode = settingsXml.SelectSingleNode("//skin");
 
+        skin = skinNode.InnerText;
         return skinNode.InnerText;
     }
 
@@ -62,6 +80,8 @@ public class DataController
         skinNode.InnerText = newSkin;
 
         settingsXml.Save(settingsFilePath);
+
+        skin = newSkin;
     }
 
     private static XmlDocument GetSettingsXml()
@@ -98,20 +118,23 @@ public class DataController
         return xmlDoc;
     }
 
-    public static Scores ReadScores()
+    public static Scores GetScores()
     {
+        if (scoresCache != null) return scoresCache;
+
         XmlSerializer xmlSerializer = new XmlSerializer(typeof(Scores));
         FileStream fileStream = new FileStream(scoresFilePath, FileMode.Open);
 
         Scores scores = (Scores) xmlSerializer.Deserialize(fileStream);
         fileStream.Close();
 
+        scoresCache = scores;
         return scores;
     }
 
     public static void AddScore(int points)
     {
-        Scores scores = ReadScores();
+        Scores scores = GetScores();
         string user = DataController.GetUser();
 
         scores.scores.Add(new Score() {
@@ -125,5 +148,7 @@ public class DataController
 
         xmlSerializer.Serialize(streamWriter,scores);
         streamWriter.Close();
+
+        scoresCache = scores;
     }
 }

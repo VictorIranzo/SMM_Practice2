@@ -20,7 +20,7 @@ public class ScoresLoader : MonoBehaviour {
         if (selectedSkin == "rocks") backImage.sprite = back_Cave;
         else backImage.sprite = back_Forest;
 
-        List<Score> scoresList = DataController.ReadScores().scores;
+        List<Score> scoresList = DataController.GetScores().scores;
 
         scoresList = scoresList.OrderByDescending(n=> n.score).Take(20).ToList();
 

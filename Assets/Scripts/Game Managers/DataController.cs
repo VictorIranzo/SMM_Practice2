@@ -9,6 +9,7 @@ using System;
 public class DataController
 {
     private static readonly string settingsDataFileName = "settings.xml";
+
     private static readonly string settingsFilePath = Path.Combine(Application.persistentDataPath, settingsDataFileName);
 
     private static readonly string scoresDataFileName = "scores.xml";
@@ -123,6 +124,14 @@ public class DataController
         if (scoresCache != null) return scoresCache;
 
         XmlSerializer xmlSerializer = new XmlSerializer(typeof(Scores));
+
+        if (!File.Exists(scoresFilePath)) {
+            Scores emptyScores = new Scores();
+            StreamWriter streamWriter = new StreamWriter(scoresFilePath);
+            xmlSerializer.Serialize(streamWriter, emptyScores);
+            streamWriter.Close();
+        }
+
         FileStream fileStream = new FileStream(scoresFilePath, FileMode.Open);
 
         Scores scores = (Scores) xmlSerializer.Deserialize(fileStream);

@@ -72,6 +72,12 @@ namespace Completed
 
         void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
         {
+            if (scene.name != "Main") {
+                gameEnd = false;
+                level = 0;
+                return;
+            }
+
             if (firstRun)
             {
                 gameEnd = false;
@@ -84,11 +90,6 @@ namespace Completed
                 level++;
                 counter.RestartCounter();
                 InitGame();
-            }
-            else {
-                gameEnd = false;
-                level = 0;
-                SoundManager.instance.Destroy();
             }
         }
 

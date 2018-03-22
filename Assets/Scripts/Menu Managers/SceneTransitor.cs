@@ -25,6 +25,7 @@ public class SceneTransitor : MonoBehaviour {
 
         SceneManager.LoadScene("Menu2D");
 
+        SoundManager.instance.Destroy();
         GameManager.instance.gameEnd = true;
 
 #if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE

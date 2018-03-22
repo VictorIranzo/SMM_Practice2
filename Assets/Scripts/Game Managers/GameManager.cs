@@ -165,9 +165,15 @@ namespace Completed
             //Disable this GameManager.
             enabled = false;
 
+            //Call the HideLevelImage function with a delay in seconds of levelStartDelay.
+            Invoke("GoToMenuDelayed", levelStartDelay);
+        }
+
+        void GoToMenuDelayed() {
             SceneManager.LoadScene("Menu2D");
 
             GameManager.instance.gameEnd = true;
+            SoundManager.instance.Destroy();
 
             PointsManager.instance.SaveScore();
 

@@ -58,8 +58,8 @@ namespace Completed
                 {   "",    "",     "",  EMPTY,     "",     "",     "",   WALL},
                 { WALL,  WALL,   WALL,  TRAMP,   WALL,   WALL,   WALL,   WALL},
                 {   "",    "",     "",  EMPTY,     "",     "",     "",     ""},
-                {   "",    "",  EMPTY,  EMPTY,     "",     "",  LEVER,     ""},
-                {   "",    "",     "",     "",     "",     "",     "",     ""},
+                {EMPTY,    "",  EMPTY,  EMPTY,     "",     "",  LEVER,     ""},
+                {EMPTY, EMPTY,     "",     "",     "",     "",     "",     ""},
             };
             return Transpose(InvertRows(level6));
         }
@@ -88,8 +88,8 @@ namespace Completed
                 {   "",    "",     "",     "",     "",   FAKE,     "",   WALL},
                 { FAKE,  FAKE,   FAKE,  EMPTY,  EMPTY,   FAKE,   FAKE,   FAKE},
                 { ROCK,  ROCK,     "",  EMPTY,   WALL,     "",     "",     ""},
-                {   "",    "",     "",     "",     "",   FAKE,     "",   WALL},
-                {EMPTY,    "",     "",     "",     "",     "",     "",     ""},
+                {EMPTY,    "",     "",     "",     "",   FAKE,     "",   WALL},
+                {EMPTY, EMPTY,     "",     "",     "",     "",     "",     ""},
             };
             return Transpose(InvertRows(level9));
         }

@@ -162,9 +162,6 @@ namespace Completed
             //Enable black background image gameObject.
             levelImage.SetActive(true);
 
-            //Disable this GameManager.
-            enabled = false;
-
             //Call the HideLevelImage function with a delay in seconds of levelStartDelay.
             Invoke("GoToMenuDelayed", levelStartDelay);
         }

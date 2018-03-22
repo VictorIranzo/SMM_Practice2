@@ -62,5 +62,6 @@ public class PointsManager : MonoBehaviour {
 
     public void SaveScore() {
         DataController.AddScore(points);
+        points = 0;
     }
 }

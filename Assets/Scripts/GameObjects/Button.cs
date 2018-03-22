@@ -24,6 +24,7 @@ public class Button : MonoBehaviour {
         active = !active;
         if (active)
         {
+            this.GetComponent<AudioSource>().Play();
             PushedButton();
             Debug.Log("Pushed");
         }

@@ -234,10 +234,10 @@ namespace Completed
                 case 5:
                     loadedPart = GetLevel5();
                     break;
-                case 1:
+                case 6:
                     loadedPart = GetLevel6();
                     break;
-                case 8:
+                case 1:
                     loadedPart = GetLevel8();
                     break;
                 case 9:

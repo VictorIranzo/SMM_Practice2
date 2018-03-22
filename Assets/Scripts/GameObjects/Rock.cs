@@ -8,6 +8,7 @@ public class Rock : MovingObject {
 
     internal void MoveRock(int xDir, int yDir)
     {
+        this.GetComponent<AudioSource>().Play();
         RaycastHit2D hit;
         Move(xDir,yDir, out hit);
     }

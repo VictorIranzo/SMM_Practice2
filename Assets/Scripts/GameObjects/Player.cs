@@ -271,6 +271,8 @@ namespace Completed
             if (lever.name.StartsWith("Lever"))
             {
                 Lever leverScript = lever.GetComponent<Lever>();
+                lever.GetComponent<AudioSource>().Play();
+
                 if (leverScript.active) leverScript.DisactiveLever();
                 else leverScript.ActivateLever();
             }

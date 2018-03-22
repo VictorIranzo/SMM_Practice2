@@ -61,6 +61,10 @@ public class CameraScript : MonoBehaviour {
     }
 
     private void AdjustScreenSize() {
+#if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+        Screen.orientation = ScreenOrientation.Landscape;
+        Camera.main.orthographicSize = (Screen.width / Screen.height) * 2.5f;
+#else
         TARGET_WIDTH = Screen.width;
         TARGET_HEIGHT = Screen.height;
         int PIXELS_TO_UNITS = 30; // 1:1 ratio of pixels to units
@@ -81,5 +85,6 @@ public class CameraScript : MonoBehaviour {
             Camera.main.orthographicSize = TARGET_HEIGHT / 4 / PIXELS_TO_UNITS * differenceInSize;
         }
         Camera.main.aspect = TARGET_WIDTH / TARGET_HEIGHT;
+#endif
     }
 }

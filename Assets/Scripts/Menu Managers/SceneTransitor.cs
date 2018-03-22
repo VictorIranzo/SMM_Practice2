@@ -26,6 +26,10 @@ public class SceneTransitor : MonoBehaviour {
         SceneManager.LoadScene("Menu2D");
 
         GameManager.instance.gameEnd = true;
+
+#if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+        Screen.orientation = ScreenOrientation.AutoRotation;
+#endif
     }
 
     public void Exit()

@@ -165,7 +165,15 @@ namespace Completed
             //Disable this GameManager.
             enabled = false;
 
+            SceneManager.LoadScene("Menu2D");
+
+            GameManager.instance.gameEnd = true;
+
             PointsManager.instance.SaveScore();
+
+#if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+            Screen.orientation = ScreenOrientation.AutoRotation;
+#endif
         }
 
         //Coroutine to move enemies in sequence.

@@ -2,6 +2,8 @@
 (Developed during the CS Degree) A Unity game in 2-dimensions in which a Rogue has to overcome some levels with tramps and zombies.
 
 # Screenshots and video
+Vídeo: https://www.youtube.com/watch?v=ITe2p0fMzbc
+
 ![](images/menu.png)
 ![](images/game.png)
 ![](images/config.png)
